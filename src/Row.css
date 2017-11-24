@@ -1,0 +1,15 @@
+.rowItem {
+  position: relative;
+  font-size: 1.3em;
+  padding: 0.4em 0.4em;
+  border-bottom: 1px groove;
+  border-bottom-color: rgba(221, 221, 221, 0.1);
+}
+
+.checkBox {
+  
+}
+
+.checkName {
+  padding: 0em 0.4em;
+}
