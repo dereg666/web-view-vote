@@ -5,15 +5,23 @@ import './App.css';
 const testdata = [
   {
     isCheck: false,
-    itemName: 'haha',
+    itemName: 'QAQ',
   },
   {
     isCheck: false,
-    itemName: 'haha2',
+    itemName: 'Ssd',
   },
   {
     isCheck: false,
-    itemName: 'haha3',
+    itemName: 'Chdjsj',
+  },
+  {
+    isCheck: false,
+    itemName: 'Djxjxif',
+  },
+  {
+    isCheck: false,
+    itemName: '安安安',
   },
 ];
 
@@ -22,23 +30,29 @@ class App extends Component {
     super();
     this.state = {
       lists: testdata,
-      temp: false,
     };
     this.checkItem = this.checkItem.bind(this);
   }
-  checkItem() {
-    this.setState({ temp: !this.state.temp });
+  checkItem(index) {
+    const temp = this.state.lists;
+    temp[index].isCheck = !temp[index].isCheck;
+    this.setState({ lists: temp });
   }
   render() {
     return (
       <div className="App">
-        <div className="checkTitle">hello</div>
+        <div className="rowItem">
+          <div className="rowText titleName">Bbmmvcc</div>
+        </div>
         <div>
-          {this.state.lists.map((it, index) => <Row
+          {this.state.lists.map((it, index) => (<Row
             index={index}
             data={it}
             check={this.checkItem}
-          />)}
+          />))}
+        </div>
+        <div className="buttonContainer">
+          <button className="submitButton">Submit</button>
         </div>
       </div>
     );

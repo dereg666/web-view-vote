@@ -1,15 +1,33 @@
 .rowItem {
   position: relative;
-  font-size: 1.3em;
-  padding: 0.4em 0.4em;
+  font-size: 1em;
+  height: 3em;
   border-bottom: 1px groove;
   border-bottom-color: rgba(221, 221, 221, 0.1);
 }
 
-.checkBox {
-  
+.rowText {
+  position: relative;
+  top: 1.5em;
+  transform: translate(0, -50%);
+}
+
+.checked {
+  color: rgb(0, 126, 251);
+  padding: 0em 0.5em;
+  position: relative;
+  vertical-align: middle;
+  top: 0.025em;
+}
+
+.unChecked {
+  color: rgb(189, 193, 201);
+  padding: 0em 0.5em;
+  position: relative;
+  vertical-align: middle;
+  top: 0.025em;
 }
 
 .checkName {
-  padding: 0em 0.4em;
+  vertical-align: middle;
 }

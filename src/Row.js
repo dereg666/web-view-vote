@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Row.css';
+import './App.css';
 
 class Row extends Component {
   constructor(props) {
@@ -9,13 +9,23 @@ class Row extends Component {
   render() {
     return (
       <div className="rowItem">
-        <input
-          className="checkBox"
-          type="checkbox"
-          onClick={() => this.props.check(this.props.index)}
-          checked={this.props.check}
-        />
-        <span className="checkName">{this.props.data.itemName}</span>
+        <div className="rowText">
+          {this.props.data.isCheck ?
+            <i
+              className="material-icons checked"
+              onClick={() => this.props.check(this.props.index)}
+              onKeyDown={() => this.props.check(this.props.index)}
+            >check_circle
+            </i> :
+            <i
+              className="material-icons unChecked"
+              onClick={() => this.props.check(this.props.index)}
+              onKeyDown={() => this.props.check(this.props.index)}
+            >radio_button_unchecked
+            </i>
+          }
+          <span className="checkName">{this.props.data.itemName}</span>
+        </div>
       </div>
     );
   }

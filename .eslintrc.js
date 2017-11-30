@@ -11,6 +11,7 @@ module.exports = {
       'react/prefer-stateless-function': 0,
       'react/forbid-prop-types': 0,
       'no-mixed-operators': 0,
+      'jsx-a11y/no-static-element-interactions': 0,
     },
     'env': {
       browser: true, // let 'window', 'document' defined
