@@ -40,6 +40,7 @@ class App extends Component {
     this.state = {
       id: '',
       lists: [],
+      title: '',
       loaded: false,
     };
     this.checkItem = this.checkItem.bind(this);
@@ -79,7 +80,8 @@ class App extends Component {
         fetch(`/api/reqList/${psid}`)
           .then(response => response.json())
           .then((data) => {
-            this.setState({ lists: data });
+            this.setState({ title: data.title });
+            this.setState({ lists: data.lists });
           }).catch((error) => {
             console.log('request failed', error);
           });
@@ -95,7 +97,7 @@ class App extends Component {
         {this.state.lists.length > 0 ?
           <div className="App">
             <div className="rowItem">
-              <div className="rowText titleName">Bbmmvcc</div>
+              <div className="rowText titleName">{this.state.title}</div>
             </div>
             <div>
               {this.state.lists.map((it, index) => (<Row
