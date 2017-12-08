@@ -39,12 +39,14 @@ class App extends Component {
     super();
     this.state = {
       id: '',
-      lists: [],
+      picks: 0,
       title: '',
+      lists: [],
       loaded: false,
     };
     this.checkItem = this.checkItem.bind(this);
     this.tick = this.tick.bind(this);
+    this.submitFunction = this.submitFunction.bind(this);
   }
   componentWillMount() {
     (function(d, s, id){
@@ -80,8 +82,7 @@ class App extends Component {
         fetch(`/api/reqList/${psid}`)
           .then(response => response.json())
           .then((data) => {
-            this.setState({ title: data.title });
-            this.setState({ lists: data.lists });
+            this.setState({ title: data.title, picks: data.picks, lists: data.lists });
           }).catch((error) => {
             console.log('request failed', error);
           });
@@ -89,6 +90,40 @@ class App extends Component {
       } else {
         setTimeout(this.tick, 100);
       }
+    }
+  }
+  submitFunction() {
+    let count = 0;
+    console.log('this', this);
+    console.log('lists: ', this.state.lists);
+    this.state.lists.map((l) => { count += l.isCheck; });
+    console.log(this);
+    if (count === this.state.picks) {
+      console.log('count: ', count);
+      fetch(`/api/submitList/${this.state.id}`, {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.state.lists),
+      }).then(response => response.json())
+        .then((res) => {
+          console.log(res);
+          if (res.ok === 200) {
+            window.MessengerExtensions.requestCloseBrowser(() => {
+              // webview closed
+            }, (err) => {
+              console.log(err);
+            });
+          } else {
+            const err = new Error(res.statusText);
+            err.response = res;
+            throw err;
+          }
+        }).catch((err) => {
+          console.error(err);
+        });
     }
   }
   render() {
@@ -107,7 +142,10 @@ class App extends Component {
               />))}
             </div>
             <div className="buttonContainer">
-              <button className="submitButton">Submit</button>
+              <button
+                className="submitButton"
+                onClick={this.submitFunction}
+              >Submit</button>
             </div>
           </div> : null
         }
